@@ -1,0 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: chenyuanzhao
+ * Date: 2017/3/26
+ * Time: 下午3:45
+ */
+return [
+    '/home'=>'HomeController@index',
+];

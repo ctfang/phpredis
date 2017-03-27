@@ -16,8 +16,10 @@ class HomeController
     public function index()
     {
         Redis::set('test',time());
-        $return = Redis::executeRaw('KEYS','*');
+        $return = Redis::execute('keys *');
         //return Redis::get('test');
+        // eval "return redis.lrange( "supplier_id", 0, -1 )" 0
+        p($return);
         return $return;
     }
 }

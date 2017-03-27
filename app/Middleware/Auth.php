@@ -15,7 +15,6 @@ class Auth
 {
     public function handle($response)
     {
-        Redis::setClient();
         return $response;
     }
 }

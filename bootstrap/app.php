@@ -9,7 +9,7 @@ use system\Route;
 
 $system = new \system\Main();
 
-require_once dirname(__DIR__).'/app/functions.php';
+require_once __DIR__ . '/functions.php';
 
 Route::baseMiddleware( \system\Config::get('middleware') );
 

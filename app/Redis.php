@@ -10,23 +10,10 @@ namespace App;
 
 
 
-class Redis
+use App\Redis\BaseRedis;
+
+class Redis extends BaseRedis
 {
-    private static $client;
-
-    public static function __callStatic($name, $arguments)
-    {
-        return call_user_func_array([self::$client,$name],$arguments);
-    }
-
-    /**
-     * 初始化
-     */
-    public static function setClient()
-    {
-        self::$client = new \Predis\Client();
-    }
-
     /**
      * 设置和更新一个简直对
      *
@@ -35,7 +22,7 @@ class Redis
      */
     public static function set($prefix, $paths)
     {
-        self::$client->set($prefix, $paths);
+        redis()->set($prefix, $paths);
     }
 
     /**
@@ -46,7 +33,7 @@ class Redis
      */
     public static function get($prefix)
     {
-        return self::$client->get($prefix);
+        return redis()->get($prefix);
     }
 
     /**
@@ -54,11 +41,17 @@ class Redis
      */
     public static function executeRaw(...$cod)
     {
-        return self::$client->executeRaw($cod);
+        return redis()->executeRaw($cod);
+    }
+
+    public static function execute($string)
+    {
+        $arr = explode(' ',$string);
+        return call_user_func_array([redis(),'executeRaw'],[$arr]);
     }
 
     public static function keys($keys)
     {
-        return self::$client->keys($keys);
+        return redis()->keys($keys);
     }
 }

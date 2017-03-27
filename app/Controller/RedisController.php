@@ -13,9 +13,23 @@ use App\Service\RedisService;
 
 class RedisController
 {
+    /**
+     * 数据库列表
+     *
+     * @return mixed
+     */
     public function database()
     {
         $arrData = (new RedisService())->getDatabaseList();
         return $arrData;
     }
+
+    /**
+     * 数据类型列表
+     */
+    public function typeList()
+    {
+
+    }
+
 }

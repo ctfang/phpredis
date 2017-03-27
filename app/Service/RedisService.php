@@ -10,6 +10,7 @@ namespace App\Service;
 
 
 use App\Redis;
+use system\Cache;
 
 class RedisService
 {
@@ -18,10 +19,15 @@ class RedisService
      */
     public function getDatabaseList()
     {
+        $cacheKey = __FILE__;
+        if( $data = Cache::get($cacheKey) ){
+            return $data;
+        }
         $arr = Redis::config('GET','databases');
         for($i=0;$i<$arr['databases'];$i++){
             $databaseList[$i] = $i;
         }
+        Cache::set($cacheKey,$databaseList,10);
         return $databaseList;
     }
 }
